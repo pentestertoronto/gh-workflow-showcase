@@ -62,7 +62,7 @@ func search(c echo.Context) error {
 	var rows *sql.Rows
 	var err error
 
-	rows, err = db.Query(fmt.Sprintf("SELECT fname, lname, email FROM users WHERE UPPER(users.fname) LIKE UPPER ('%s')", searchString))
+	rows, err = db.Query("SELECT fname, lname, email FROM users WHERE UPPER(users.fname) LIKE UPPER ($1)", searchString)
 	checkErr(err)
 
 	user := Users{}
